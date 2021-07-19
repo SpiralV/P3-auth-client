@@ -17,7 +17,11 @@ export default function Events(props) {
         // make axios request to get currentuser events 
         async function runRequest(){
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/events/${props.currentUser.id}`)
-            setEvents(response.data.events)
+            let friendEvent = response.data.events.user[0]  
+            setEvents(
+                response.data.events,
+                friendEvent
+                )
         }
         runRequest()
         // update value of events to be currentUser events
@@ -85,6 +89,6 @@ export default function Events(props) {
                     )
                 })} 
                 </div>
-                
+
             </div>
     )}
